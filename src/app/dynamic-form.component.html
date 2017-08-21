@@ -1,0 +1,42 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+    <div *ngFor="let question of questions" class="">
+      {{question.section}}
+    </div>
+    <br />
+
+    <div *ngFor="let sectionH of sections">
+        <div>{{sectionH}}</div>
+        <!--
+        <div class="divTableBody" *ngFor="let question of questions | sectionGrouping:{section:sectionH}">
+            <div class="divTableCell">{{question.label}}</div>
+        </div>
+        -->
+
+        <div *ngFor="let question of questions | sectionGrouping:{section:sectionH}" class="form-row">
+          <df-question [question]="question" [form]="form"></df-question>
+        </div>
+
+        <br />
+        <br />
+
+    </div>
+
+    <br />
+
+    <!--
+    <div *ngFor="let question of questions" class="form-row">
+      <df-question [question]="question" [form]="form"></df-question>
+    </div>
+    -->
+
+    <div class="form-row">
+      <button type="submit" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
+
+  <div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong><br>{{payLoad}}
+  </div>
+</div>
